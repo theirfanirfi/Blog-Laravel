@@ -1,6 +1,6 @@
 @include('Admin.includes.header')
 @include('Admin.includes.sidebar')
-@include('Admin.dashboard')
+@yield('content')
 @include('Admin.includes.footer')
 
 

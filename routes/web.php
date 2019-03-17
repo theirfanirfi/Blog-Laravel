@@ -12,7 +12,7 @@
 */
 
 Route::get('/login','LoginController@index');
-Route::post('/login','LoginController@login')->name('login');
+Route::post('/login','LoginController@register')->name('login');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'AuthWare'],function(){
 Route::get('/','AdminController@index')->name('dashboard');

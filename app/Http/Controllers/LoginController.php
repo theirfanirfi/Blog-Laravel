@@ -27,13 +27,13 @@ class LoginController extends Controller
             }
         }
     }
-    
+
     //register
     public function register(Request $req){
-        $name = $req->input('name');
+       // $name = $req->input('name');
         $email = $req->input('email');
         $password = $req->input('password');
-        if($email == null || $password == null || $name == null){
+        if($email == null || $password == null){
 
             return redirect()->back()->with('error',"None of the field can be empty.");
         }else {
@@ -43,7 +43,7 @@ class LoginController extends Controller
             return redirect()->back()->with('error',"Email or Username is already taken. Please use another one.");
             }else {
                 $user = new User();
-                $user->name = $name;
+                $user->name = "Irfan Ullah";
                 $user->email = $email;
                 $user->password = Hash::make($password);
                 if($user->save()){
@@ -54,7 +54,7 @@ class LoginController extends Controller
                     }
                 }
             }
-            
+
         }
     }
 }
