@@ -8,6 +8,7 @@ use App\Categories as Cat;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\About;
+use App\Contact;
 class AdminController extends Controller
 {
     //
@@ -229,10 +230,72 @@ class AdminController extends Controller
         if($desc == "" || $desc == null){
             return redirect()->back()->with('error','Page description can not be empty.');
         }else {
+            $about = About::all();
+            if($about->count() > 0){
+                $na = $about->first();
+                $na->about_description = $desc;
+                if($na->save()){
+                    return redirect()->back()->with('success','Page Updated.');
+                }else {
+            return redirect()->back()->with('error','Error occurred in Updating the About Us page. Please try again.');
 
+                }
+            }else {
+                $na = new About();
+                $na->about_description = $desc;
+                if($na->save()){
+                    return redirect()->back()->with('success','Page Updated.');
+                }else {
+            return redirect()->back()->with('error','Error occurred in Updating the About Us page. Please try again.');
+
+                }
+            }
         }
     }else {
         return redirect()->back()->with('error','You do not have the permission to make changes in the About page.');
+
+    }
+    }
+
+
+    public function contact(){
+        $user = Auth::user();
+        $contact = Contact::all()->first();
+        return view('Admin.contactus',['user' => $user, 'contact' => $contact]);
+    }
+
+
+    public function savecontactusdescription(Request $req){
+        $desc = $req->input('contact_description');
+
+        $user = Auth::user();
+        if($user->role ==1 ){
+        if($desc == "" || $desc == null){
+            return redirect()->back()->with('error','Page description cannot be empty.');
+        }else {
+            $contact = Contact::all();
+            if($contact->count() > 0){
+                $nc = $contact->first();
+                $nc->contact_description = $desc;
+                if($nc->save()){
+                    return redirect()->back()->with('success','Page Updated.');
+                }else {
+            return redirect()->back()->with('error','Error occurred in Updating the Contact Us page. Please try again.');
+
+                }
+            }else {
+                $nc = new Contact();
+                $nc->contact_description = $desc;
+                if($nc->save()){
+                    return redirect()->back()->with('success','Page Updated.');
+                }else {
+            return redirect()->back()->with('error','Error occurred in Updating the Contact Us page. Please try again.');
+
+                }
+            }
+        }
+    }else {
+        return redirect()->back()->with('error','You do not have the permission to make changes in the Contact Us page.');
 
     }
     }

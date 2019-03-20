@@ -62,6 +62,16 @@
                 </a>
               </li>
 
+              <li class="">
+                    <a href="{{ route('contact') }}">
+                      <i class="fa fa-users"></i>
+                      <span>Contact Us</span>
+                      <span class="pull-right-container">
+
+                      </span>
+                    </a>
+                  </li>
+
 
 
 

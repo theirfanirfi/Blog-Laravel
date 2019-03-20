@@ -21,19 +21,19 @@
 
       <div class="box">
             <div class="box-header">
-              <h3 class="box-title">About Us Page Description</h3>
+              <h3 class="box-title">Contact Us Page Description</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <form action="{{ route('saveabout') }}" method="POST">
-                    <textarea name="about_description" class="textarea" placeholder="Place some text here"
+                <form action="{{ route('savecontactusdescription') }}" method="POST">
+                    <textarea name="contact_description" class="textarea" placeholder="Place some text here"
                     style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                <?php if(!empty($about->about_description)){ echo $about->about_description; } ?>
+                <?php if(!empty($contact->contact_description)){ echo $contact->contact_description; } ?>
                 </textarea>
                     @csrf
                     <div class="form-group pull-right">
-                            <button type="submit" name="save" class="btn btn-primary">Save Changes</button>
-                                       </div>
+                    <button type="submit" name="save" class="btn btn-primary">Save Changes</button>
+                     </div>
                 </form>
             </div>
             <!-- /.box-body -->

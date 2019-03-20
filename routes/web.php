@@ -52,6 +52,10 @@ Route::get('catblogs/{id}','BlogController@catblogs')->name('catblogs');
 Route::get('about/','AdminController@about')->name('aboutus');
 Route::post('saveabout','AdminController@saveabout')->name('saveabout');
 
+//Contact Us
+
+Route::get('contact','AdminController@contact')->name('contact');
+Route::post('savecontactusdescription','AdminController@savecontactusdescription')->name('savecontactusdescription');
 
 
 
@@ -62,4 +66,7 @@ Route::post('saveabout','AdminController@saveabout')->name('saveabout');
 Route::get('/', 'FrontendController@index')->name('home');
 Route::get('/blog/{id}', 'FrontendController@blog')->name('blog');
 Route::get('/blogsbycategory/{id}', 'FrontendController@blogsByCat')->name('blogsbycategory');
+Route::get('about','FrontendController@about')->name('about');
+Route::get('contactus','FrontendController@contactus')->name('contactus');
+
 
