@@ -26,6 +26,7 @@
 <script src="{{ URL::asset('dist/js/demo.js') }}"></script>
 <script src="{{ URL::asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script>
         $(function () {
 
@@ -42,6 +43,14 @@
         $(document).ready(function () {
     $('.sidebar-menu').tree()
   });
+
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+   // CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
       </script>
 </body>
 </html>

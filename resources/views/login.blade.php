@@ -35,6 +35,8 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
+    @include('Admin.includes.alert')
+
     <p class="login-box-msg">Sign in to start your session</p>
 
     <form action="{{ route('login') }}" method="post">

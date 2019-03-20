@@ -7,6 +7,7 @@ use Auth;
 use App\Categories as Cat;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\About;
 class AdminController extends Controller
 {
     //
@@ -142,6 +143,97 @@ class AdminController extends Controller
     }
 
     public function edituser($id){
+        $user = Auth::user();
+        $users = User::where('id', '!=',$user->id)->get();
+        if($id == ""){
+            return redirect()->back()->with('error','User Profile must be provided.');
+        }else if($user->role != 1){
+            return redirect()->back()->with('error','You do not have the permissions to edit user profiles');
+        }else {
+            $userProfile = User::find($id);
+            return view('Admin.edituser',['user' => $user,'up' => $userProfile, 'users' => $users]);
+        }
 
+    }
+
+    public function updateuser(Request $req){
+        $id = $req->input('user_id');
+        $name = $req->input('name');
+        $email = $req->input('email');
+        $password = $req->input('password');
+        $cpassword = $req->input('cpassword');
+        $role = $req->input('role');
+
+
+
+        if($name == "" || $role == "" || $role > 3 || $role < 1){
+            return redirect()->back()->with('error','None of the fields can be empty.');
+        }else if(($password != "" && $cpassword == "") || ($password == "" && $cpassword != "")){
+            return redirect()->back()->with('error','None of the fields can be empty.');
+        }
+        else if($password != "" && $cpassword != "" && $password != $cpassword) {
+            return redirect()->back()->with('error','Confirm password does not match.');
+        }else {
+            $u = User::find($id);
+            $u->name = $name;
+
+            if($email != "" && $u->email != $email){
+             $u->email = $email;
+            }
+
+            // else {
+            //    // return redirect()->back()->with('error','User with the entered email already exists. Please use any other email.');
+            // }
+
+            $u->role = $role;
+
+            if($password != ""){
+            $u->password = Hash::make($password);
+            }
+
+            if($u->save()){
+                return redirect()->back()->with('success','User Updated.');
+            }else {
+                return redirect()->back()->with('error','Error occurred in Updating the user. Please try again.');
+            }
+
+
+    }
+    }
+
+    public function deleteUser($id){
+        $user = Auth::user();
+        if($id == "" || $id == null){
+            return redirect()->back()->with('error','Please Provide User.');
+        }else {
+            $ud = User::find($id);
+            if($ud->delete()){
+                return redirect('admin/users')->with('success','User Deleted.');
+            }else {
+                return redirect()->back()->with('error','Error occurred in deleting the user. Please try again.');
+            }
+        }
+    }
+
+    public function about(){
+        $user = Auth::user();
+        $about = About::all()->first();
+        return view('Admin.aboutus',['user' => $user,'about' => $about]);
+    }
+
+    public function saveabout(Request $req){
+        $desc = $req->input('about_description');
+
+        $user = Auth::user();
+        if($user->role ==1 ){
+        if($desc == "" || $desc == null){
+            return redirect()->back()->with('error','Page description can not be empty.');
+        }else {
+
+        }
+    }else {
+        return redirect()->back()->with('error','You do not have the permission to make changes in the About page.');
+
+    }
     }
 }

@@ -38,8 +38,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i>View</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Add New</a></li>
+            <li><a href="{{ route('blogs') }}"><i class="fa fa-circle-o"></i>View</a></li>
+            <li><a href="{{ route('addblog') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
           </ul>
         </li>
         <li class="">
@@ -47,10 +47,20 @@
             <i class="fa fa-users"></i>
             <span>Users</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+
             </span>
           </a>
         </li>
+
+        <li class="">
+                <a href="{{ route('aboutus') }}">
+                  <i class="fa fa-users"></i>
+                  <span>About Us</span>
+                  <span class="pull-right-container">
+
+                  </span>
+                </a>
+              </li>
 
 
 

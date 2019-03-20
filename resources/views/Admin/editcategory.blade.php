@@ -19,6 +19,7 @@
 
     <!-- Main content -->
     <section class="content">
+            @include('Admin.includes.alert')
 
       <!-- Default box -->
       <div class="box">

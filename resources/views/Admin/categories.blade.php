@@ -18,6 +18,7 @@
 
     <!-- Main content -->
     <section class="content">
+            @include('Admin.includes.alert')
 
       <!-- Default box -->
       <div class="box">
@@ -68,11 +69,15 @@
                 <tbody>
                 <tr>
                     @foreach ($cats as $c)
-                    <td>{{ $c->cat_title }}</td>
-                    <td>{{ $c->getBlogsCountForCat() }}</td>
-                    <td><a href="{{ route('editcat',['id' => $c->cat_id]) }}"><i class="fa fa-pencil"></i></a> | <a href="{{ route('deletecat',['id' => $c->cat_id]) }}"><i class="fa fa-trash"></i></a></td>
-                    @endforeach
+                    <td><a href="{{ route('catblogs',['id' => $c->cat_id]) }}"> {{  $c->cat_title }}</a></td>
+                    <td><a href="{{ route('catblogs',['id' => $c->cat_id]) }}">{{ $c->getBlogsCountForCat() }}</a></td>
+                    <td><a href="{{ route('editcat',['id' => $c->cat_id]) }}"><i class="fa fa-pencil"></i></a> |
+                        @if($user->role == 1)
+                        <a href="{{ route('deletecat',['id' => $c->cat_id]) }}"><i class="fa fa-trash"></i></a></td>
+                        @endif
                 </tr>
+                @endforeach
+
 
                 </tbody>
         <tfoot>

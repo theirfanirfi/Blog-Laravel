@@ -18,11 +18,11 @@
 
     <!-- Main content -->
     <section class="content">
-
+        @include('Admin.includes.alert')
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Add New User</h3>
+          <h3 class="box-title">Update User</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -31,26 +31,27 @@
           </div>
         </div>
         <div class="box-body">
-<form action="{{ route('adduser') }}" method="post">
+<form action="{{ route('updateuser') }}" method="post">
     @csrf
     <div class="row">
 <div class="col-md-3">
         <div class="form-group">
                 <label for="fullname">Full Name</label>
-                <input type="text" class="form-control" id="fullname" placeholder="Enter Full name" name="name">
+                <input type="text" class="form-control" id="fullname" placeholder="Enter Full name" name="name"  value="{{ $up->name }}">
               </div>
 </div>
 
 <div class="col-md-3">
         <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
+                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" value="{{ $up->email }}">
               </div>
 </div>
+<input type="hidden" name="user_id" value="{{ $up->id }}" />
 <div class="col-md-3">
         <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="" autocomplete="false">
               </div>
 </div>
 </div>
@@ -69,15 +70,15 @@
         <div class="form-group">
                 <label>Role</label>
                 <select name="role" class="form-control select2" style="width: 100%;">
-                  <option value="1">Admin</option>
-                  <option value="2">Editor</option>
-                  <option value="3">Contributor</option>
+                  <option <?php if($up->role == 1){ echo "selected"; } ?> value="1">Admin</option>
+                  <option <?php if($up->role == 2){ echo "selected"; } ?> value="2">Editor</option>
+                  <option <?php if($up->role == 3){ echo "selected"; } ?> value="3">Contributor</option>
                 </select>
               </div>
         </div>
 
         <div class="col-md-3">
-                <button type="submit" style="margin-top:24px;" class="btn btn-primary">Add User</button>
+                <button type="submit" style="margin-top:24px;" class="btn btn-info">Update User</button>
                                 </div>
         </div>
 </form>
