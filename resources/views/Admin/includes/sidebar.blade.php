@@ -5,7 +5,12 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                @if(!empty($user->profile_image))
+                <img src="{{ URL::asset('images/profile/') }}/{{ $user->profile_image }}" class="image-circle img-circle" style="width:60px;height:40px;" alt="User Image">
+                @else
+                <img src="{{ URL::asset('dist/img/user2-160x160.jpg') }}" class="image-circle img-circle" style="width:60px;height:40px;" alt="User Image">
+
+                @endif
         </div>
         <div class="pull-left info">
           <p>{{ $user->name }}</p>
@@ -23,7 +28,7 @@
 
         <li class="">
             <a href="{{ route('categories') }}">
-              <i class="fa fa-laptop"></i>
+              <i class="ion ion-pie-graph"></i>
               <span>Categories</span>
             </a>
           </li>
@@ -31,7 +36,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-pie-chart"></i>
+            <i class="ion ion-bag"></i>
             <span>Blogs</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -54,7 +59,7 @@
 
         <li class="">
                 <a href="{{ route('aboutus') }}">
-                  <i class="fa fa-users"></i>
+                  <i class=""></i>
                   <span>About Us</span>
                   <span class="pull-right-container">
 
@@ -64,7 +69,7 @@
 
               <li class="">
                     <a href="{{ route('contact') }}">
-                      <i class="fa fa-users"></i>
+                      <i class=""></i>
                       <span>Contact Us</span>
                       <span class="pull-right-container">
 

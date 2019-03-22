@@ -9,13 +9,17 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\About;
 use App\Contact;
+use App\Blog;
 class AdminController extends Controller
 {
     //
 
     public function index(){
         $user = Auth::user();
-        return view('Admin.dashboard',['user' => $user]);
+        $blogs = Blog::all()->count();
+        $users = User::all()->count();
+        $categories = Cat::all()->count();
+        return view('Admin.dashboard',['user' => $user, 'blogs' => $blogs, 'users' => $users, 'categories' => $categories]);
     }
 
     public function categories(){
@@ -298,5 +302,78 @@ class AdminController extends Controller
         return redirect()->back()->with('error','You do not have the permission to make changes in the Contact Us page.');
 
     }
+    }
+
+    public function profile(){
+        $user = Auth::user();
+        return view('Admin.profile',['user' => $user]);
+    }
+
+    public function changeprofile(Request $req){
+        $user = Auth::user();
+        $name = $req->input('name');
+        $email = $req->input('email');
+
+        if($name == "" || $email == ""){
+            return redirect()->back()->with('error','Full name or Email field cannot be empty.');
+        }else {
+            $u = User::where(['email' => $email]);
+            if($u->count() > 0 && $user->email != $email){
+                return redirect()->back()->with('error','The email is already taken.');
+            }else {
+            $user->name = $name;
+            $user->email = $email;
+            if($user->save()){
+                return redirect()->back()->with('success','Profile Details updated.');
+            }else {
+                return redirect()->back()->with('error','Error occurred in updating the profile details. Please try again.');
+
+            }
+        }
+        }
+    }
+
+    public function changeprofileimage(Request $req){
+        $user = Auth::user();
+        $DESTINATION_PATH = "images/profile";
+        if($req->hasFile('profile_image')){
+            $file = $req->file('profile_image');
+
+            $IMAGE_FILE_NAME = $file->getClientOriginalName();
+            if($file->move($DESTINATION_PATH,$IMAGE_FILE_NAME)){
+            $user->profile_image = $IMAGE_FILE_NAME;
+            if($user->save()){
+                return redirect()->back()->with('success','Profile Image updated.');
+            }else{
+                return redirect()->back()->with('error','Image Uploaded but not saved in the database. Please try it again.');
+            }
+            }else {
+                return redirect()->back()->with('error','Error occurred in uploading the File.');
+            }
+
+        }else {
+            return redirect()->back()->with('error','Image is not selected.');
+        }
+    }
+
+    public function changepassword(Request $req){
+        $user = Auth::user();
+        $cpass = $req->input('cpass');
+        $newpass = $req->input('npass');
+
+        if($cpass == "" || $newpass == ""){
+            return redirect()->back()->with('error','None of the field can be empty.');
+        }else {
+            if(Hash::check($cpass, $user->password)){
+                $user->password = Hash::make($newpass);
+                if($user->save()){
+                return redirect()->back()->with('success','Password Updated.');
+                }else {
+                return redirect()->back()->with('error','Error occurred in updating the password. Please try again.');
+                }
+            }else {
+                return redirect()->back()->with('error','Invalid current password.');
+            }
+        }
     }
 }

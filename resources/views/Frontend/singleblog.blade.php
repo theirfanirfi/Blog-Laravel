@@ -68,7 +68,6 @@
 <div class="post-preview">
         <a href="post.html">
           <h2 class="post-title">
-           {{ $b->blog_title }}
           </h2>
           <h3 class="post-subtitle">
           </h3>

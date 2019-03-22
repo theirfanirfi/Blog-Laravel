@@ -14,31 +14,32 @@ class FrontendController extends Controller
     public function index(){
         $blogs = Blog::all();
         $cats = Cat::all();
-        return View('Frontend.home',['blogs' => $blogs, 'cats' => $cats]);
+        return View('Frontend.home',['blogs' => $blogs, 'cats' => $cats, 'title' => 'home']);
     }
 
     public function blog($id){
         $blog = Blog::find($id);
-        return view('Frontend.singleblog',['b' => $blog]);
+        return view('Frontend.singleblog',['b' => $blog, 'title' => $blog->blog_title]);
     }
 
     public function blogsByCat($id){
         $blogs = Blog::where(['cat_id' => $id]);
         $cats = Cat::all();
-        return View('Frontend.home',['blogs' => $blogs, 'cats' => $cats]);
+        $cat = Cat::find($id);
+        return View('Frontend.home',['blogs' => $blogs, 'cats' => $cats,'title' => $cat->cat_title]);
     }
 
     public function about(){
         $about = About::all()->first();
         $cats = Cat::all();
 
-        return view('Frontend.about',['about' => $about, 'cats' => $cats]);
+        return view('Frontend.about',['about' => $about, 'cats' => $cats,'title' => 'About Us']);
     }
 
     public function contactus(){
         $contact = Contact::all()->first();
         $cats = Cat::all();
 
-        return view('Frontend.contact',['contact' => $contact, 'cats' => $cats]);
+        return view('Frontend.contact',['contact' => $contact, 'cats' => $cats, 'title' => 'Contact Us']);
     }
 }

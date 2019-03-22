@@ -70,13 +70,14 @@
                 </tr>
                 </thead>
                 <tbody>
+                        @foreach ($cats as $c)
                 <tr>
-                    @foreach ($cats as $c)
+
                     <td>{{ $c->cat_title }}</td>
                     <td>{{ $c->getBlogsCountForCat() }}</td>
                     <td><a href="{{ route('editcat',['id' => $c->cat_id]) }}"><i class="fa fa-pencil"></i></a> | <a href="{{ route('deletecat',['id' => $c->cat_id]) }}"><i class="fa fa-trash"></i></a></td>
-                    @endforeach
                 </tr>
+                @endforeach
 
                 </tbody>
         <tfoot>

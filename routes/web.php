@@ -57,6 +57,12 @@ Route::post('saveabout','AdminController@saveabout')->name('saveabout');
 Route::get('contact','AdminController@contact')->name('contact');
 Route::post('savecontactusdescription','AdminController@savecontactusdescription')->name('savecontactusdescription');
 
+//Profile
+Route::get('profile','AdminController@profile')->name('profile');
+Route::post('changeprofile','AdminController@changeprofile')->name('changeprofile');
+Route::post('changeprofileimage','AdminController@changeprofileimage')->name('changeprofileimage');
+Route::post('changepassword','AdminController@changepassword')->name('changepassword');
+
 
 
 });

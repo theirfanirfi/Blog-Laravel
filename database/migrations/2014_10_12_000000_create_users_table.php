@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role')->default(0); 
+            $table->integer('role')->default(0);
             /*
             @ 1. Admin
             @ 2. Editor
@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             */
 
             $table->string('role_name')->nullable();
+            $table->text('profile_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
