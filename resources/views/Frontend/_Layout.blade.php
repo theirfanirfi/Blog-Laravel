@@ -44,6 +44,14 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('contactus') }}">Contact</a>
           </li>
+
+          <li class="nav-item">
+              @if(Auth::user())
+              <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+              @else
+              <a class="nav-link" href="{{ route('login') }}">Login</a>
+              @endif
+            </li>
         </ul>
       </div>
     </div>

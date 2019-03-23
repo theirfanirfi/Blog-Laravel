@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-<?php echo $about->about_description; ?>
+<?php if(!empty($about->about_description)){ echo $about->about_description; } ?>
 
       </div>
       <div class="col-lg-2 col-md-2 mx-auto">
