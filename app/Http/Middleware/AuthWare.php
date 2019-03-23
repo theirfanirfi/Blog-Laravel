@@ -15,8 +15,8 @@ class AuthWare
      */
     public function handle($request, Closure $next)
     {
-        //&& Auth::user()->role != 0
-        if(Auth::check()){
+        //
+        if(Auth::check() && Auth::user()->role != 0){
         return $next($request);
         }else {
             return redirect('/login')->with('error','Please login and continue.');
